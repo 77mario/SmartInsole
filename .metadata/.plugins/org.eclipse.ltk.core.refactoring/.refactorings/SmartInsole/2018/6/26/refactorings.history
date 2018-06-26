@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;SmartInsole/Src/ADC_Reader&apos; to &apos;ADC_Reader.c&apos;" description="Rename resource &apos;ADC_Reader&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Src/ADC_Reader" name="ADC_Reader.c" stamp="1530006711472" updateReferences="true"/>
+</session>
