@@ -1,7 +1,7 @@
 [PreviousGenFiles]
-HeaderPath=C:/Users/mario/Desktop/Sistemi Embedded/workspace/smartShoes1/Inc
+HeaderPath=C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc
 HeaderFiles=stm32f4xx_it.h;stm32f4xx_hal_conf.h;main.h;
-SourcePath=C:/Users/mario/Desktop/Sistemi Embedded/workspace/smartShoes1/Src
+SourcePath=C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Src
 SourceFiles=stm32f4xx_it.c;stm32f4xx_hal_msp.c;main.c;
 
 [PreviousLibFiles]
