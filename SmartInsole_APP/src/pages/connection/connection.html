@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Connection
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+      <button ion-button [disabled]="!isenabled" block (click)="pairSmartShoes()">Accoppia</button>
+
+    
+<ion-list padding>
+  <button ion-button block (click)="startScanning()">scan</button>
+ <ion-list-header>
+    Paired Devices
+  </ion-list-header>
+  <ion-item *ngFor="let device of pairedDevices">
+    {{device.name}}
+  </ion-item>
+  <button ion-button block (click)="disconnect()">Disconnect</button>
+  <ion-list-header>
+    availlable Devices
+  </ion-list-header>
+  <ion-item *ngFor='let device of unpairedDevices'>
+    <span (click)="selectDevice(device.address)">
+      {{device.address}}
+    </span>
+  </ion-item>
+  <ion-spinner name="crescent" *ngIf="gettingDevices"></ion-spinner>
+</ion-list>
+</ion-content>
+
+
