@@ -27,6 +27,10 @@ int adc_read_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart2){
 
 	sprintf(msg1, "F1: %d F2:%d F3:%d W1: %d W2:%d W3:%d x: %d y:%d z:%d R:%d \r\n", flexi_1,flexi_2,flexi_3,w1,w2,w3,x,y,z,result);
 	HAL_UART_Transmit(huart2, (uint8_t*)msg1, strlen(msg1), HAL_MAX_DELAY);
+	// se la camminata è automatica, bisogna passare anche is moving
+	sprintf(msg1, '{ "weight" : ["%d","%d","%d"], "outcome" : "%d"}',w1,w2,w3,result);
+	HAL_UART_Transmit(huart2, (uint8_t*)msg1, strlen(msg1), HAL_MAX_DELAY);
+
 	return result;
 	//char *msg2 = "----------------------------------- \r\n";
 	//HAL_UART_Transmit(&huart2, (uint8_t*) msg2, strlen(msg2), HAL_MAX_DELAY);
@@ -39,10 +43,18 @@ int is_moving(uint16_t x, uint16_t y, uint16_t z){
 	return 0;
 }
 
-//y = -15.3846 x + 50.7692 ---- 2 - 3.30
-//y = -62.5 x + 136.25
+// punto di intersezione tra le due rette: 1.85 = 2295
 int get_weight(uint16_t raw_value){
-	return -28.85*(raw_value*3.3/4095) +95.4;
+	int w;
+	if(raw_value < 2295){
+		w = -62.5*(raw_value*3.3/4095) + 136.25;
+	} else {
+		w = -15.38*(raw_value*3.3/4095) + 50.77;
+	}
+	if (raw_value > 3970){
+		return 0;
+	}
+	return w;
 }
 
 // 0 = PESO SBAGLIATO

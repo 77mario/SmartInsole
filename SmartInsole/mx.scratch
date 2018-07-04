@@ -9,7 +9,6 @@
 
 <filestoremove>
     <file>
-    <name>..\Src\system_stm32f4xx.c</name>
     </file>
 </filestoremove>
 
