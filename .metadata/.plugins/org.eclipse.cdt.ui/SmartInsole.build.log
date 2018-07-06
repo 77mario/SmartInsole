@@ -1,11 +1,11 @@
-12:42:29 **** Incremental Build of configuration Debug for project SmartInsole ****
+17:12:21 **** Incremental Build of configuration Debug for project SmartInsole ****
 make all 
 Building file: ../Src/main.c
 Invoking: MCU GCC Compiler
 C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
-arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
 ../Src/main.c: In function 'main':
-../Src/main.c:126:35: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+../Src/main.c:134:35: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
       if(HAL_ADC_Start_DMA(&hadc1, (uint16_t*)&adc_buffer, hadc1.Init.NbrOfConversion) != HAL_OK);
                                    ^
 In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:260:0,
@@ -15,13 +15,13 @@ C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/S
  HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
                    ^~~~~~~~~~~~~~~~~
 ../Src/main.c: In function 'HAL_ADC_ConvCpltCallback':
-../Src/main.c:344:18: warning: passing argument 1 of 'adc_read_values' from incompatible pointer type [-Wincompatible-pointer-types]
-  adc_read_values(&adc_buffer,&huart2);
-                  ^
+../Src/main.c:401:31: warning: passing argument 1 of 'adc_read_values' from incompatible pointer type [-Wincompatible-pointer-types]
+  int result = adc_read_values(&adc_buffer,&huart2);
+                               ^
 In file included from ../Src/main.c:44:0:
-C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/adc_reader.h:12:6: note: expected 'uint16_t * {aka short unsigned int *}' but argument is of type 'uint16_t (*)[6] {aka short unsigned int (*)[6]}'
- void adc_read_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart2);
-      ^~~~~~~~~~~~~~~
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/adc_reader.h:12:5: note: expected 'uint16_t * {aka short unsigned int *}' but argument is of type 'uint16_t (*)[6] {aka short unsigned int (*)[6]}'
+ int adc_read_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart2);
+     ^~~~~~~~~~~~~~~
 Finished building: ../Src/main.c
  
 Building target: SmartInsole.elf
@@ -34,8 +34,8 @@ Generating binary and Printing size information:
 arm-none-eabi-objcopy -O binary "SmartInsole.elf" "SmartInsole.bin"
 arm-none-eabi-size "SmartInsole.elf"
    text	   data	    bss	    dec	    hex	filename
-  11716	    120	   1992	  13828	   3604	SmartInsole.elf
+  14888	    128	   2048	  17064	   42a8	SmartInsole.elf
  
 
-12:42:30 Build Finished (took 1s.385ms)
+17:12:22 Build Finished (took 1s.385ms)
 

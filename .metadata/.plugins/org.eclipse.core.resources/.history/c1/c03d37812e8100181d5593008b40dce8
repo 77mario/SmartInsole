@@ -28,7 +28,7 @@ int adc_read_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart2){
 	sprintf(msg1, "F1: %d F2:%d F3:%d W1: %d W2:%d W3:%d x: %d y:%d z:%d R:%d \r\n", flexi_1,flexi_2,flexi_3,w1,w2,w3,x,y,z,result);
 	HAL_UART_Transmit(huart2, (uint8_t*)msg1, strlen(msg1), HAL_MAX_DELAY);
 	// se la camminata è automatica, bisogna passare anche is moving
-	sprintf(msg1, "{\"weight\" : [\"%d\",\"%d\",\"%d\"], \"outcome\" : \"%d\"}",w1,w2,w3,result);
+	sprintf(msg1, " {\"weight\" : [\"%d\",\"%d\",\"%d\"], \"outcome\" : \"%d\"}",w1,w2,w3,result);
 	HAL_UART_Transmit(huart2, (uint8_t*)msg1, strlen(msg1), HAL_MAX_DELAY);
 
 	return result;
