@@ -25,7 +25,7 @@ void static_read(int counter,UART_HandleTypeDef* huart){
 	int f1perc =f1tot*100/(f1tot+f2tot+f3tot);
 	int f2perc =f2tot*100/(f1tot+f2tot+f3tot);
 	int f3perc =f3tot*100/(f1tot+f2tot+f3tot);
-	sprintf(msg1, "{\"weight_perc\" : [\"%d\",\"%d\",\"%d\"]\"}", f1perc,f2perc,f3perc);
+	sprintf(msg1, "{\"code\" : \"1\", \"weight_perc\" : {\"avan_sx\":\"%d\",\"avan_dx\":\"%d\",\"back\":\"%d\"}\"}", f1perc,f2perc,f3perc);
 	HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
 
 }
