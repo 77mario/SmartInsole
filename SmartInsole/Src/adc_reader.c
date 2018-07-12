@@ -4,14 +4,39 @@
  *  Created on: 26 giu 2018
  *      Author: mario
  */
+
+
 #include "adc_reader.h"
-
 double TOL = 5.0;
+int X_STATIC = 2045;
+int Y_STATIC = 2415;
+int Z_STATIC = 2005;
+int MAX_MOV = 15;
+static double f1tot = 0.0;
+static double f2tot = 0.0;
+static double f3tot = 0.0;
 
-int adc_read_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart2){
+void static_read(int counter,UART_HandleTypeDef* huart){
+
+	char msg1[1000];
+	f1tot = f1tot/counter;
+	f2tot = f2tot/counter;
+	f3tot = f3tot/counter;
+	int f1perc =f1tot*100/(f1tot+f2tot+f3tot);
+	int f2perc =f2tot*100/(f1tot+f2tot+f3tot);
+	int f3perc =f3tot*100/(f1tot+f2tot+f3tot);
+	sprintf(msg1, "{\"weight_perc\" : [\"%d\",\"%d\",\"%d\"]\"}", f1perc,f2perc,f3perc);
+	HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+
+}
+void reset_weight(){
+	f1tot = 0.0;
+	f2tot = 0.0;
+	f3tot = 0.0;
+}
+int adc_read_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart){
 // TODO
 	char msg1[1000];
-
 	uint16_t flexi_1 = adc_buffer[0];
 	uint16_t flexi_2 = adc_buffer[1];
 	uint16_t flexi_3 = adc_buffer[2];
@@ -22,19 +47,32 @@ int adc_read_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart2){
 	int w1 = get_weight(flexi_1);
 	int w2 = get_weight(flexi_2);
 	int w3 = get_weight(flexi_3);
+	f1tot = f1tot+w1;
+	f2tot = f2tot+w2;
+	f3tot = f3tot+w3;
 
-	int result = check_weight(w1, w2, w3, is_moving(x,y,z));
-
+	//int result = check_weight(w1, w2, w3, is_moving(x,y,z));
+	int result = check_accel_static(x,y,z);
 	sprintf(msg1, "F1: %d F2:%d F3:%d W1: %d W2:%d W3:%d x: %d y:%d z:%d R:%d \r\n", flexi_1,flexi_2,flexi_3,w1,w2,w3,x,y,z,result);
-	HAL_UART_Transmit(huart2, (uint8_t*)msg1, strlen(msg1), HAL_MAX_DELAY);
+	//HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
 	// se la camminata è automatica, bisogna passare anche is moving
-	sprintf(msg1, "{\"weight\" : [\"%d\",\"%d\",\"%d\"], \"outcome\" : \"%d\"}",w1,w2,w3,result);
-	HAL_UART_Transmit(huart2, (uint8_t*)msg1, strlen(msg1), HAL_MAX_DELAY);
-
+	//sprintf(msg1, "{\"weight\" : [\"%d\",\"%d\",\"%d\"], \"outcome\" : \"%d\"}",w1,w2,w3,result);
+	//HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+	//if(w1 == 0.0 and w2 == 0.0 and)
 	return result;
 	//char *msg2 = "----------------------------------- \r\n";
 	//HAL_UART_Transmit(&huart2, (uint8_t*) msg2, strlen(msg2), HAL_MAX_DELAY);
 
+
+}
+
+// 0 SBAGLIATO
+// 1 OK
+int check_accel_static(int x, int y, int z){
+	if (x > X_STATIC + MAX_MOV ||x < X_STATIC - MAX_MOV ||y > Y_STATIC + MAX_MOV ||y < Y_STATIC - MAX_MOV ||z > Z_STATIC + MAX_MOV ||z < Z_STATIC - MAX_MOV){
+		return 0;
+	}
+	return 1;
 }
 
 // 0 = FERMO
@@ -51,7 +89,7 @@ int get_weight(uint16_t raw_value){
 	} else {
 		w = -15.38*(raw_value*3.3/4095) + 50.77;
 	}
-	if (raw_value > 3970){
+	if (raw_value > 3850){
 		return 0;
 	}
 	return w;
@@ -66,7 +104,7 @@ int check_weight(int w1, int w2, int w_back, int is_moving){
 	double w_front_perc = w_front*100/w_tot;
 	double w_back_perc = w_back*100/w_tot;
 	if(is_moving == 0){
-		if(w_front_perc + TOL > 50 || w_back_perc + TOL > 60){
+		if(w_front_perc > 50 +TOL || w_back_perc  > 60 + TOL){
 			return 0;
 		} else {
 			return 1;
