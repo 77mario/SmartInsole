@@ -8,24 +8,38 @@
 
 #include "adc_reader.h"
 double TOL = 5.0;
-int X_STATIC = 2045;
-int Y_STATIC = 2415;
-int Z_STATIC = 2005;
-int MAX_MOV = 15;
+static int X_STATIC = 2045;
+static int Y_STATIC = 2415;
+static int Z_STATIC = 2005;
+int MAX_MOV = 22;
 static double f1tot = 0.0;
 static double f2tot = 0.0;
 static double f3tot = 0.0;
 
+void calibrate(uint16_t* adc_buffer){
+	X_STATIC = adc_buffer[3];
+	Y_STATIC = adc_buffer[4];
+	Z_STATIC = adc_buffer[5];
+
+}
+
 void static_read(int counter,UART_HandleTypeDef* huart){
 
 	char msg1[1000];
+	//si potrebbe cancellare
 	f1tot = f1tot/counter;
 	f2tot = f2tot/counter;
 	f3tot = f3tot/counter;
-	int f1perc =f1tot*100/(f1tot+f2tot+f3tot);
 	int f2perc =f2tot*100/(f1tot+f2tot+f3tot);
 	int f3perc =f3tot*100/(f1tot+f2tot+f3tot);
-	sprintf(msg1, "{\"code\" : \"1\", \"weight_perc\" : {\"avan_sx\":\"%d\",\"avan_dx\":\"%d\",\"back\":\"%d\"}\"}\n", f1perc,f2perc,f3perc);
+	int f1perc  = 100 -f2perc-f3perc;
+	//sprintf(msg1, "{\"code\" : \"1\", \"weight_normal\" : {\"avan_sx\":%f,\"avan_dx\":%f,\"back\":%f}}\n", f1tot,f2tot,f3tot);
+	//HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+
+	if(f1tot == 0.0 && f2tot == 0.0 && f3tot == 0.0){
+		f1perc = f2perc = f3perc = 0;
+	}
+	sprintf(msg1, "{\"code\" : \"1\", \"weight_perc\" : {\"avan_sx\":%d,\"avan_dx\":%d,\"back\":%d}}\n", f1perc,f2perc,f3perc);
 	HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
 
 }
@@ -36,7 +50,7 @@ void reset_weight(){
 }
 int adc_read_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart){
 // TODO
-	char* msg1;
+	char msg1[1000];
 	uint16_t flexi_1 = adc_buffer[0];
 	uint16_t flexi_2 = adc_buffer[1];
 	uint16_t flexi_3 = adc_buffer[2];
@@ -56,7 +70,7 @@ int adc_read_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart){
 	sprintf(msg1, "F1: %d F2:%d F3:%d W1: %d W2:%d W3:%d x: %d y:%d z:%d R:%d \r\n", flexi_1,flexi_2,flexi_3,w1,w2,w3,x,y,z,result);
 	//HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
 	// se la camminata è automatica, bisogna passare anche is moving
-	//sprintf(msg1, "{\"weight\" : [\"%d\",\"%d\",\"%d\"], \"outcome\" : \"%d\"}",w1,w2,w3,result);
+	//sprintf(msg1, "{\"weight\" : [\"%d\",\"%d\",\"%d\"], \"outcome\" : \"%d\"}\r\n",w1,w2,w3,result);
 	//HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
 	//if(w1 == 0.0 and w2 == 0.0 and)
 	return result;
@@ -90,7 +104,7 @@ int get_weight(uint16_t raw_value){
 		w = -15.38*(raw_value*3.3/4095) + 50.77;
 	}
 	if (raw_value > 3850){
-		return 0;
+	  return 0;
 	}
 	return w;
 }
