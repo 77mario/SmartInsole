@@ -1105,3 +1105,1862 @@ arm-none-eabi-size "SmartInsole.elf"
    text	   data	    bss	    dec	    hex	filename
   14888	    128	   2048	  17064	   42a8	SmartInsole.elf
  
+10:19:59 **** Clean-only build of configuration Debug for project SmartInsole ****
+make clean 
+rm -rf *
+ 
+10:20:00 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../startup/startup_stm32f401xe.s
+Invoking: MCU GCC Assembler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-as -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -g -o "startup/startup_stm32f401xe.o" "../startup/startup_stm32f401xe.s"
+Finished building: ../startup/startup_stm32f401xe.s
+ 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:43:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:43:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:43:43: note: include '<string.h>' or provide a declaration of 'strlen'
+Finished building: ../Src/adc_reader.c
+ 
+Building file: ../Src/main.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+../Src/main.c: In function 'HAL_ADC_ConvCpltCallback':
+../Src/main.c:410:33: warning: passing argument 1 of 'adc_read_values' from incompatible pointer type [-Wincompatible-pointer-types]
+    int result = adc_read_values(&adc_buffer, &huart1);
+                                 ^
+In file included from ../Src/main.c:44:0:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/adc_reader.h:15:5: note: expected 'uint16_t * {aka short unsigned int *}' but argument is of type 'uint16_t (*)[6] {aka short unsigned int (*)[6]}'
+ int adc_read_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart);
+     ^~~~~~~~~~~~~~~
+../Src/main.c:423:3: warning: implicit declaration of function 'calibrate' [-Wimplicit-function-declaration]
+   calibrate(&adc_buffer);
+   ^~~~~~~~~
+../Src/main.c: In function 'HAL_TIM_PeriodElapsedCallback':
+../Src/main.c:447:9: warning: unused variable 'i' [-Wunused-variable]
+    char i = rx_buffer[0];
+         ^
+../Src/main.c:442:10: warning: unused variable 'msg' [-Wunused-variable]
+    char *msg = "Completo";
+          ^~~
+../Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Src/main.c:474:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+../Src/main.c:483:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+Finished building: ../Src/main.c
+ 
+Building file: ../Src/stm32f4xx_hal_msp.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/stm32f4xx_hal_msp.d" -MT"Src/stm32f4xx_hal_msp.o" -o "Src/stm32f4xx_hal_msp.o" "../Src/stm32f4xx_hal_msp.c"
+Finished building: ../Src/stm32f4xx_hal_msp.c
+ 
+Building file: ../Src/stm32f4xx_it.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/stm32f4xx_it.d" -MT"Src/stm32f4xx_it.o" -o "Src/stm32f4xx_it.o" "../Src/stm32f4xx_it.c"
+Finished building: ../Src/stm32f4xx_it.c
+ 
+Building file: ../Src/system_stm32f4xx.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/system_stm32f4xx.d" -MT"Src/system_stm32f4xx.o" -o "Src/system_stm32f4xx.o" "../Src/system_stm32f4xx.c"
+Finished building: ../Src/system_stm32f4xx.c
+ 
+Building file: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o" -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o" "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c"
+Finished building: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
+ 
+Building file: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.o" -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.o" "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c"
+Finished building: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c
+ 
+Building file: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.o" -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.o" "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c"
+Finished building: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c
+ 
+Building file: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o" -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o" "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c"
+Finished building: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
+ 
+Building file: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o" -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o" "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c"
+Finished building: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c
+ 
+Building file: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o" -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o" "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c"
+Finished building: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c
+ 
+Building file: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o" -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o" "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c"
+Finished building: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c
+ 
+Building file: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o" -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o" "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c"
+Finished building: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c
+ 
+Building file: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o" -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o" "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c"
+Finished building: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c
+ 
+Building file: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o" -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o" "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c"
+Finished building: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
+ 
+Building file: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o" -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o" "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c"
+Finished building: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
+ 
+Building file: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o" -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o" "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c"
+Finished building: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c
+ 
+Building file: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o" -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o" "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c"
+Finished building: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
+ 
+Building file: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o" -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o" "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c"
+Finished building: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c
+ 
+Building file: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o" -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o" "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c"
+Finished building: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c
+ 
+Building file: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o" -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o" "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c"
+Finished building: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
+ 
+Building file: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o" -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o" "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c"
+Finished building: ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24192	    508	   2000	  26700	   684c	SmartInsole.elf
+ 
+11:01:24 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:44:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:44:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:44:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:59:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:59:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:70:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:122:17: error: 'huart1' undeclared (first use in this function)
+   dynamic_read(&huart1);
+                 ^~~~~~
+../Src/adc_reader.c:122:17: note: each undeclared identifier is reported only once for each function it appears in
+../Src/adc_reader.c:101:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: At top level:
+../Src/adc_reader.c:141:1: error: expected identifier or '(' before '}' token
+ }
+ ^
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:124:2: warning: control reaches end of non-void function [-Wreturn-type]
+  }
+  ^
+make: *** [Src/adc_reader.o] Error 1
+Src/subdir.mk:30: recipe for target 'Src/adc_reader.o' failed
+11:09:00 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:46:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:46:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:46:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:61:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:61:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:72:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:103:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: At top level:
+../Src/adc_reader.c:143:1: error: expected identifier or '(' before '}' token
+ }
+ ^
+Src/subdir.mk:30: recipe for target 'Src/adc_reader.o' failed
+make: *** [Src/adc_reader.o] Error 1
+11:09:18 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:46:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:46:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:46:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:61:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:61:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:72:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:103:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: At top level:
+../Src/adc_reader.c:143:1: error: expected identifier or '(' before '}' token
+ }
+ ^
+Src/subdir.mk:30: recipe for target 'Src/adc_reader.o' failed
+make: *** [Src/adc_reader.o] Error 1
+11:09:30 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:46:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:46:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:46:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:61:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:61:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:72:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:103:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+Finished building: ../Src/adc_reader.c
+ 
+Building file: ../Src/main.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+../Src/main.c: In function 'HAL_ADC_ConvCpltCallback':
+../Src/main.c:410:33: warning: passing argument 1 of 'adc_read_values' from incompatible pointer type [-Wincompatible-pointer-types]
+    int result = adc_read_values(&adc_buffer, &huart1);
+                                 ^
+In file included from ../Src/main.c:44:0:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/adc_reader.h:16:5: note: expected 'uint16_t * {aka short unsigned int *}' but argument is of type 'uint16_t (*)[6] {aka short unsigned int (*)[6]}'
+ int adc_read_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart);
+     ^~~~~~~~~~~~~~~
+../Src/main.c:423:40: warning: passing argument 1 of 'adc_read_dynamic_values' from incompatible pointer type [-Wincompatible-pointer-types]
+   int result = adc_read_dynamic_values(&adc_buffer, &huart1);
+                                        ^
+In file included from ../Src/main.c:44:0:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/adc_reader.h:17:5: note: expected 'uint16_t * {aka short unsigned int *}' but argument is of type 'uint16_t (*)[6] {aka short unsigned int (*)[6]}'
+ int adc_read_dynamic_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart);
+     ^~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.c:438:3: warning: implicit declaration of function 'calibrate' [-Wimplicit-function-declaration]
+   calibrate(&adc_buffer);
+   ^~~~~~~~~
+../Src/main.c: In function 'HAL_TIM_PeriodElapsedCallback':
+../Src/main.c:462:9: warning: unused variable 'i' [-Wunused-variable]
+    char i = rx_buffer[0];
+         ^
+../Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Src/main.c:489:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+../Src/main.c:497:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+../Src/main.c:502:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+Finished building: ../Src/main.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24864	    508	   2008	  27380	   6af4	SmartInsole.elf
+ 
+11:11:14 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:46:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:46:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:46:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:61:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:61:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:72:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:103:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+Finished building: ../Src/adc_reader.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24864	    508	   2008	  27380	   6af4	SmartInsole.elf
+ 
+11:19:23 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+11:24:50 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/main.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+../Src/main.c: In function 'HAL_ADC_ConvCpltCallback':
+../Src/main.c:410:33: warning: passing argument 1 of 'adc_read_values' from incompatible pointer type [-Wincompatible-pointer-types]
+    int result = adc_read_values(&adc_buffer, &huart1);
+                                 ^
+In file included from ../Src/main.c:44:0:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/adc_reader.h:16:5: note: expected 'uint16_t * {aka short unsigned int *}' but argument is of type 'uint16_t (*)[6] {aka short unsigned int (*)[6]}'
+ int adc_read_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart);
+     ^~~~~~~~~~~~~~~
+../Src/main.c:423:40: warning: passing argument 1 of 'adc_read_dynamic_values' from incompatible pointer type [-Wincompatible-pointer-types]
+   int result = adc_read_dynamic_values(&adc_buffer, &huart1);
+                                        ^
+In file included from ../Src/main.c:44:0:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/adc_reader.h:17:5: note: expected 'uint16_t * {aka short unsigned int *}' but argument is of type 'uint16_t (*)[6] {aka short unsigned int (*)[6]}'
+ int adc_read_dynamic_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart);
+     ^~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.c:438:3: warning: implicit declaration of function 'calibrate' [-Wimplicit-function-declaration]
+   calibrate(&adc_buffer);
+   ^~~~~~~~~
+../Src/main.c: In function 'HAL_TIM_PeriodElapsedCallback':
+../Src/main.c:462:9: warning: unused variable 'i' [-Wunused-variable]
+    char i = rx_buffer[0];
+         ^
+../Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Src/main.c:489:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+../Src/main.c:497:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+../Src/main.c:502:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+Finished building: ../Src/main.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24856	    508	   2008	  27372	   6aec	SmartInsole.elf
+ 
+11:54:51 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/main.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+../Src/main.c: In function 'HAL_ADC_ConvCpltCallback':
+../Src/main.c:410:33: warning: passing argument 1 of 'adc_read_values' from incompatible pointer type [-Wincompatible-pointer-types]
+    int result = adc_read_values(&adc_buffer, &huart1);
+                                 ^
+In file included from ../Src/main.c:44:0:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/adc_reader.h:16:5: note: expected 'uint16_t * {aka short unsigned int *}' but argument is of type 'uint16_t (*)[6] {aka short unsigned int (*)[6]}'
+ int adc_read_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart);
+     ^~~~~~~~~~~~~~~
+../Src/main.c:423:40: warning: passing argument 1 of 'adc_read_dynamic_values' from incompatible pointer type [-Wincompatible-pointer-types]
+   int result = adc_read_dynamic_values(&adc_buffer, &huart1);
+                                        ^
+In file included from ../Src/main.c:44:0:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/adc_reader.h:17:5: note: expected 'uint16_t * {aka short unsigned int *}' but argument is of type 'uint16_t (*)[6] {aka short unsigned int (*)[6]}'
+ int adc_read_dynamic_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart);
+     ^~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.c:442:3: warning: implicit declaration of function 'calibrate' [-Wimplicit-function-declaration]
+   calibrate(&adc_buffer);
+   ^~~~~~~~~
+../Src/main.c: In function 'HAL_TIM_PeriodElapsedCallback':
+../Src/main.c:466:9: warning: unused variable 'i' [-Wunused-variable]
+    char i = rx_buffer[0];
+         ^
+../Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Src/main.c:493:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+../Src/main.c:501:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+../Src/main.c:506:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+Finished building: ../Src/main.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24872	    508	   2008	  27388	   6afc	SmartInsole.elf
+ 
+11:56:34 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:46:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:46:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:46:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:61:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:61:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:72:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:103:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c:126:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../Src/adc_reader.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24840	    508	   2008	  27356	   6adc	SmartInsole.elf
+ 
+11:56:59 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+11:57:34 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/main.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+../Src/main.c: In function 'HAL_ADC_ConvCpltCallback':
+../Src/main.c:410:33: warning: passing argument 1 of 'adc_read_values' from incompatible pointer type [-Wincompatible-pointer-types]
+    int result = adc_read_values(&adc_buffer, &huart1);
+                                 ^
+In file included from ../Src/main.c:44:0:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/adc_reader.h:16:5: note: expected 'uint16_t * {aka short unsigned int *}' but argument is of type 'uint16_t (*)[6] {aka short unsigned int (*)[6]}'
+ int adc_read_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart);
+     ^~~~~~~~~~~~~~~
+../Src/main.c:423:40: warning: passing argument 1 of 'adc_read_dynamic_values' from incompatible pointer type [-Wincompatible-pointer-types]
+   int result = adc_read_dynamic_values(&adc_buffer, &huart1);
+                                        ^
+In file included from ../Src/main.c:44:0:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/adc_reader.h:17:5: note: expected 'uint16_t * {aka short unsigned int *}' but argument is of type 'uint16_t (*)[6] {aka short unsigned int (*)[6]}'
+ int adc_read_dynamic_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart);
+     ^~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.c:439:3: warning: implicit declaration of function 'calibrate' [-Wimplicit-function-declaration]
+   calibrate(&adc_buffer);
+   ^~~~~~~~~
+../Src/main.c: In function 'HAL_TIM_PeriodElapsedCallback':
+../Src/main.c:463:9: warning: unused variable 'i' [-Wunused-variable]
+    char i = rx_buffer[0];
+         ^
+../Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Src/main.c:490:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+../Src/main.c:498:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+../Src/main.c:503:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+Finished building: ../Src/main.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24824	    508	   2008	  27340	   6acc	SmartInsole.elf
+ 
+12:03:02 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:46:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:46:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:46:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:60:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:60:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:71:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:102:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c:126:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../Src/adc_reader.c
+ 
+Building file: ../Src/main.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+../Src/main.c: In function 'HAL_ADC_ConvCpltCallback':
+../Src/main.c:410:33: warning: passing argument 1 of 'adc_read_values' from incompatible pointer type [-Wincompatible-pointer-types]
+    int result = adc_read_values(&adc_buffer, &huart1);
+                                 ^
+In file included from ../Src/main.c:44:0:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/adc_reader.h:16:5: note: expected 'uint16_t * {aka short unsigned int *}' but argument is of type 'uint16_t (*)[6] {aka short unsigned int (*)[6]}'
+ int adc_read_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart);
+     ^~~~~~~~~~~~~~~
+../Src/main.c:423:40: warning: passing argument 1 of 'adc_read_dynamic_values' from incompatible pointer type [-Wincompatible-pointer-types]
+   int result = adc_read_dynamic_values(&adc_buffer, &huart1);
+                                        ^
+In file included from ../Src/main.c:44:0:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/adc_reader.h:17:5: note: expected 'uint16_t * {aka short unsigned int *}' but argument is of type 'uint16_t (*)[6] {aka short unsigned int (*)[6]}'
+ int adc_read_dynamic_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart);
+     ^~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.c:439:3: warning: implicit declaration of function 'calibrate' [-Wimplicit-function-declaration]
+   calibrate(&adc_buffer);
+   ^~~~~~~~~
+../Src/main.c: In function 'HAL_TIM_PeriodElapsedCallback':
+../Src/main.c:463:9: warning: unused variable 'i' [-Wunused-variable]
+    char i = rx_buffer[0];
+         ^
+../Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Src/main.c:490:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+../Src/main.c:496:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+../Src/main.c:501:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+Finished building: ../Src/main.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24832	    508	   2008	  27348	   6ad4	SmartInsole.elf
+ 
+12:06:04 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:46:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:46:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:46:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:60:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:60:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:71:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:102:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c:126:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../Src/adc_reader.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24816	    508	   2008	  27332	   6ac4	SmartInsole.elf
+ 
+12:07:44 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:46:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:46:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:46:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:60:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:60:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:71:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:102:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c:127:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../Src/adc_reader.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24832	    508	   2008	  27348	   6ad4	SmartInsole.elf
+ 
+12:09:06 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:46:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:46:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:46:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:60:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:60:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:71:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:102:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c:127:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../Src/adc_reader.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24832	    508	   2008	  27348	   6ad4	SmartInsole.elf
+ 
+12:09:56 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:46:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:46:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:46:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:60:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:60:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:71:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:102:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c:127:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../Src/adc_reader.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24832	    508	   2008	  27348	   6ad4	SmartInsole.elf
+ 
+12:10:35 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:46:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:46:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:46:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:60:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:60:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:71:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:102:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c:127:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../Src/adc_reader.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24832	    508	   2008	  27348	   6ad4	SmartInsole.elf
+ 
+12:11:01 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:13:34 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:46:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:46:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:46:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:60:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:60:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:71:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:102:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c:127:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../Src/adc_reader.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24832	    508	   2008	  27348	   6ad4	SmartInsole.elf
+ 
+12:16:41 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:17:24 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:18:55 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:20:30 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:20:39 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:20:58 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:26:04 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:46:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:46:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:46:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:60:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:60:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:71:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:102:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c:126:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../Src/adc_reader.c
+ 
+Building file: ../Src/main.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+../Src/main.c: In function 'HAL_ADC_ConvCpltCallback':
+../Src/main.c:410:33: warning: passing argument 1 of 'adc_read_values' from incompatible pointer type [-Wincompatible-pointer-types]
+    int result = adc_read_values(&adc_buffer, &huart1);
+                                 ^
+In file included from ../Src/main.c:44:0:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/adc_reader.h:16:5: note: expected 'uint16_t * {aka short unsigned int *}' but argument is of type 'uint16_t (*)[6] {aka short unsigned int (*)[6]}'
+ int adc_read_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart);
+     ^~~~~~~~~~~~~~~
+../Src/main.c:426:40: warning: passing argument 1 of 'adc_read_dynamic_values' from incompatible pointer type [-Wincompatible-pointer-types]
+   int result = adc_read_dynamic_values(&adc_buffer, &huart1);
+                                        ^
+In file included from ../Src/main.c:44:0:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/adc_reader.h:17:5: note: expected 'uint16_t * {aka short unsigned int *}' but argument is of type 'uint16_t (*)[6] {aka short unsigned int (*)[6]}'
+ int adc_read_dynamic_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart);
+     ^~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.c:442:3: warning: implicit declaration of function 'calibrate' [-Wimplicit-function-declaration]
+   calibrate(&adc_buffer);
+   ^~~~~~~~~
+../Src/main.c: In function 'HAL_TIM_PeriodElapsedCallback':
+../Src/main.c:466:9: warning: unused variable 'i' [-Wunused-variable]
+    char i = rx_buffer[0];
+         ^
+../Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Src/main.c:493:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+../Src/main.c:499:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+../Src/main.c:504:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+Finished building: ../Src/main.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24816	    508	   2008	  27332	   6ac4	SmartInsole.elf
+ 
+12:26:20 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/main.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+../Src/main.c: In function 'HAL_ADC_ConvCpltCallback':
+../Src/main.c:410:33: warning: passing argument 1 of 'adc_read_values' from incompatible pointer type [-Wincompatible-pointer-types]
+    int result = adc_read_values(&adc_buffer, &huart1);
+                                 ^
+In file included from ../Src/main.c:44:0:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/adc_reader.h:16:5: note: expected 'uint16_t * {aka short unsigned int *}' but argument is of type 'uint16_t (*)[6] {aka short unsigned int (*)[6]}'
+ int adc_read_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart);
+     ^~~~~~~~~~~~~~~
+../Src/main.c:423:40: warning: passing argument 1 of 'adc_read_dynamic_values' from incompatible pointer type [-Wincompatible-pointer-types]
+   int result = adc_read_dynamic_values(&adc_buffer, &huart1);
+                                        ^
+In file included from ../Src/main.c:44:0:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/adc_reader.h:17:5: note: expected 'uint16_t * {aka short unsigned int *}' but argument is of type 'uint16_t (*)[6] {aka short unsigned int (*)[6]}'
+ int adc_read_dynamic_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart);
+     ^~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.c:441:3: warning: implicit declaration of function 'calibrate' [-Wimplicit-function-declaration]
+   calibrate(&adc_buffer);
+   ^~~~~~~~~
+../Src/main.c: In function 'HAL_TIM_PeriodElapsedCallback':
+../Src/main.c:465:9: warning: unused variable 'i' [-Wunused-variable]
+    char i = rx_buffer[0];
+         ^
+../Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Src/main.c:492:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+../Src/main.c:498:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+../Src/main.c:503:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+Finished building: ../Src/main.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24816	    508	   2008	  27332	   6ac4	SmartInsole.elf
+ 
+12:29:11 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:46:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:46:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:46:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:60:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:60:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:71:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:102:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c:126:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../Src/adc_reader.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24840	    508	   2008	  27356	   6adc	SmartInsole.elf
+ 
+12:29:42 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:30:05 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:30:28 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:31:32 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:33:42 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:46:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:46:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:46:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:60:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:60:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:71:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:102:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c:126:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../Src/adc_reader.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24816	    508	   2008	  27332	   6ac4	SmartInsole.elf
+ 
+12:36:11 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:36:41 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:38:03 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:38:11 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:38:22 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:38:56 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:39:10 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:39:15 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:40:29 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:41:01 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:41:14 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:42:00 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:44:02 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:46:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:46:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:46:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:60:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:60:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:71:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:102:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c:126:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../Src/adc_reader.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24816	    508	   2008	  27332	   6ac4	SmartInsole.elf
+ 
+12:47:24 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:46:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:46:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:46:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:60:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:60:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:71:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:107:11: warning: unused variable 'z' [-Wunused-variable]
+  uint16_t z = adc_buffer[5];
+           ^
+../Src/adc_reader.c:106:11: warning: unused variable 'y' [-Wunused-variable]
+  uint16_t y = adc_buffer[4];
+           ^
+../Src/adc_reader.c:105:11: warning: unused variable 'x' [-Wunused-variable]
+  uint16_t x = adc_buffer[3];
+           ^
+../Src/adc_reader.c:125:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../Src/adc_reader.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24816	    508	   2008	  27332	   6ac4	SmartInsole.elf
+ 
+12:50:50 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/main.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+../Src/main.c: In function 'HAL_ADC_ConvCpltCallback':
+../Src/main.c:410:33: warning: passing argument 1 of 'adc_read_values' from incompatible pointer type [-Wincompatible-pointer-types]
+    int result = adc_read_values(&adc_buffer, &huart1);
+                                 ^
+In file included from ../Src/main.c:44:0:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/adc_reader.h:16:5: note: expected 'uint16_t * {aka short unsigned int *}' but argument is of type 'uint16_t (*)[6] {aka short unsigned int (*)[6]}'
+ int adc_read_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart);
+     ^~~~~~~~~~~~~~~
+../Src/main.c:426:43: warning: passing argument 1 of 'adc_read_dynamic_values' from incompatible pointer type [-Wincompatible-pointer-types]
+      int result = adc_read_dynamic_values(&adc_buffer, &huart1);
+                                           ^
+In file included from ../Src/main.c:44:0:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/adc_reader.h:17:5: note: expected 'uint16_t * {aka short unsigned int *}' but argument is of type 'uint16_t (*)[6] {aka short unsigned int (*)[6]}'
+ int adc_read_dynamic_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart);
+     ^~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.c:441:3: warning: implicit declaration of function 'calibrate' [-Wimplicit-function-declaration]
+   calibrate(&adc_buffer);
+   ^~~~~~~~~
+../Src/main.c: In function 'HAL_TIM_PeriodElapsedCallback':
+../Src/main.c:465:9: warning: unused variable 'i' [-Wunused-variable]
+    char i = rx_buffer[0];
+         ^
+../Src/main.c: In function 'HAL_UART_RxCpltCallback':
+../Src/main.c:492:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+../Src/main.c:498:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+../Src/main.c:503:33: warning: passing argument 2 of 'HAL_ADC_Start_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+   if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+                                 ^
+In file included from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc/stm32f4xx_hal_conf.h:265:0,
+                 from C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:46,
+                 from ../Src/main.c:40:
+C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:553:19: note: expected 'uint32_t * {aka long unsigned int *}' but argument is of type 'uint16_t * {aka short unsigned int *}'
+ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length);
+                   ^~~~~~~~~~~~~~~~~
+Finished building: ../Src/main.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24840	    508	   2008	  27356	   6adc	SmartInsole.elf
+ 
+12:51:00 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:51:13 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:51:22 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:51:27 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:51:34 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:52:03 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:46:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:46:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:46:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:60:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:60:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:71:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:107:11: warning: unused variable 'z' [-Wunused-variable]
+  uint16_t z = adc_buffer[5];
+           ^
+../Src/adc_reader.c:106:11: warning: unused variable 'y' [-Wunused-variable]
+  uint16_t y = adc_buffer[4];
+           ^
+../Src/adc_reader.c:105:11: warning: unused variable 'x' [-Wunused-variable]
+  uint16_t x = adc_buffer[3];
+           ^
+Finished building: ../Src/adc_reader.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24848	    508	   2008	  27364	   6ae4	SmartInsole.elf
+ 
+12:53:07 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:55:10 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:46:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:46:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:46:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:60:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:60:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:71:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:107:11: warning: unused variable 'z' [-Wunused-variable]
+  uint16_t z = adc_buffer[5];
+           ^
+../Src/adc_reader.c:106:11: warning: unused variable 'y' [-Wunused-variable]
+  uint16_t y = adc_buffer[4];
+           ^
+../Src/adc_reader.c:105:11: warning: unused variable 'x' [-Wunused-variable]
+  uint16_t x = adc_buffer[3];
+           ^
+Finished building: ../Src/adc_reader.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24848	    508	   2008	  27364	   6ae4	SmartInsole.elf
+ 
+12:56:20 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:46:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:46:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:46:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:60:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:60:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:71:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:107:11: warning: unused variable 'z' [-Wunused-variable]
+  uint16_t z = adc_buffer[5];
+           ^
+../Src/adc_reader.c:106:11: warning: unused variable 'y' [-Wunused-variable]
+  uint16_t y = adc_buffer[4];
+           ^
+../Src/adc_reader.c:105:11: warning: unused variable 'x' [-Wunused-variable]
+  uint16_t x = adc_buffer[3];
+           ^
+Finished building: ../Src/adc_reader.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24840	    508	   2008	  27356	   6adc	SmartInsole.elf
+ 
+12:56:26 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+make: Nothing to be done for 'all'.
+12:57:55 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:46:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:46:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:46:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:60:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:60:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:71:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:107:11: warning: unused variable 'z' [-Wunused-variable]
+  uint16_t z = adc_buffer[5];
+           ^
+../Src/adc_reader.c:106:11: warning: unused variable 'y' [-Wunused-variable]
+  uint16_t y = adc_buffer[4];
+           ^
+../Src/adc_reader.c:105:11: warning: unused variable 'x' [-Wunused-variable]
+  uint16_t x = adc_buffer[3];
+           ^
+Finished building: ../Src/adc_reader.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24856	    508	   2008	  27372	   6aec	SmartInsole.elf
+ 
+13:00:48 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:47:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:47:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:47:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:61:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:61:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:72:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:108:11: warning: unused variable 'z' [-Wunused-variable]
+  uint16_t z = adc_buffer[5];
+           ^
+../Src/adc_reader.c:107:11: warning: unused variable 'y' [-Wunused-variable]
+  uint16_t y = adc_buffer[4];
+           ^
+../Src/adc_reader.c:106:11: warning: unused variable 'x' [-Wunused-variable]
+  uint16_t x = adc_buffer[3];
+           ^
+Finished building: ../Src/adc_reader.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24856	    508	   2008	  27372	   6aec	SmartInsole.elf
+ 
+13:03:07 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:47:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:47:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:47:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:61:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:61:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:72:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:108:11: warning: unused variable 'z' [-Wunused-variable]
+  uint16_t z = adc_buffer[5];
+           ^
+../Src/adc_reader.c:107:11: warning: unused variable 'y' [-Wunused-variable]
+  uint16_t y = adc_buffer[4];
+           ^
+../Src/adc_reader.c:106:11: warning: unused variable 'x' [-Wunused-variable]
+  uint16_t x = adc_buffer[3];
+           ^
+Finished building: ../Src/adc_reader.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24872	    508	   2008	  27388	   6afc	SmartInsole.elf
+ 
+14:22:47 **** Incremental Build of configuration Debug for project SmartInsole ****
+make all 
+Building file: ../Src/adc_reader.c
+Invoking: MCU GCC Compiler
+C:\Users\mario\Desktop\smartInsole\smartInsole\SmartInsole\SmartInsole\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F401xE -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/mario/Desktop/smartInsole/smartInsole/SmartInsole/SmartInsole/Drivers/CMSIS/Include"  -O2 -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/adc_reader.d" -MT"Src/adc_reader.o" -o "Src/adc_reader.o" "../Src/adc_reader.c"
+../Src/adc_reader.c: In function 'static_read':
+../Src/adc_reader.c:47:43: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:47:43: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/adc_reader.c:47:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'dynamic_read':
+../Src/adc_reader.c:61:43: warning: incompatible implicit declaration of built-in function 'strlen'
+  HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+                                           ^~~~~~
+../Src/adc_reader.c:61:43: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/adc_reader.c: In function 'adc_read_values':
+../Src/adc_reader.c:72:7: warning: unused variable 'msg1' [-Wunused-variable]
+  char msg1[1000];
+       ^~~~
+../Src/adc_reader.c: In function 'adc_read_dynamic_values':
+../Src/adc_reader.c:108:11: warning: unused variable 'z' [-Wunused-variable]
+  uint16_t z = adc_buffer[5];
+           ^
+../Src/adc_reader.c:107:11: warning: unused variable 'y' [-Wunused-variable]
+  uint16_t y = adc_buffer[4];
+           ^
+../Src/adc_reader.c:106:11: warning: unused variable 'x' [-Wunused-variable]
+  uint16_t x = adc_buffer[3];
+           ^
+Finished building: ../Src/adc_reader.c
+ 
+Building target: SmartInsole.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -u _printf_float -T"../STM32F401RETx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "SmartInsole.elf" @"objects.list"   -lm
+Finished building target: SmartInsole.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "SmartInsole.elf" "SmartInsole.hex"
+arm-none-eabi-size "SmartInsole.elf"
+   text	   data	    bss	    dec	    hex	filename
+  24944	    508	   2008	  27460	   6b44	SmartInsole.elf
+ 

@@ -419,7 +419,25 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* AdcHandle) {
 				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_SET);
 			}
 		}
-	} else if (choice == 3) {
+	}else if(choice == 2){
+		average_counter = average_counter + 1;
+
+				if (average_counter % 60 == 1) {
+					int result = adc_read_dynamic_values(&adc_buffer, &huart1);
+
+					if (result == 1) {
+						dynamic_read(&huart1);
+						reset_weight();
+						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_SET);
+
+						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_RESET);
+					} else {
+						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET);
+
+						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_SET);
+					}
+				}
+	}else if (choice == 3) {
 		calibrate(&adc_buffer);
 		HAL_ADC_Stop_DMA(&hadc1);
 
@@ -439,7 +457,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 			HAL_TIM_Base_Stop_IT(&htim3);
 			static_read(average_counter, &huart1);
 
-			char *msg = "Completo";
+			//char *msg = "Completo";
 
 			//HAL_UART_Transmit(&huart1, (uint8_t*)msg, strlen(msg), 0xFFFF);
 
@@ -475,11 +493,13 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart) {
 				hadc1.Init.NbrOfConversion) != HAL_OK) {
 		}
 		return;
-
-	}
-
-
-	else if (choice == 3) {
+	}else if (choice == 2){
+		reset_weight();
+		if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
+						hadc1.Init.NbrOfConversion) != HAL_OK) {
+		}
+		return;
+	}else if (choice == 3) {
 		if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
 				hadc1.Init.NbrOfConversion) != HAL_OK) {
 		}
