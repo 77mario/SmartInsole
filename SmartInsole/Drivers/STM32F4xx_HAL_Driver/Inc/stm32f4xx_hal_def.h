@@ -43,9 +43,7 @@
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f4xx.h"
-#include "Legacy/stm32_hal_legacy.h"
-#include <stdio.h>
+
 
 /* Exported types ------------------------------------------------------------*/
 
@@ -68,7 +66,9 @@ typedef enum
   HAL_UNLOCKED = 0x00U,
   HAL_LOCKED   = 0x01U  
 } HAL_LockTypeDef;
-
+#include "stm32f4xx.h"
+#include "Legacy/stm32_hal_legacy.h"
+#include <stdio.h>
 /* Exported macro ------------------------------------------------------------*/
 
 #define UNUSED(X) (void)X      /* To avoid gcc/g++ warnings */
