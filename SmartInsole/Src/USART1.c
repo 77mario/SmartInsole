@@ -69,9 +69,10 @@ void start_static(int time){
 	start_ADC();
 }
 void start_dynamic(){
-	stop_ADC();
-	set_led(YELLOW);
-	reset_led(GREEN);
+	reset_weight();
+	start_ADC();
+	reset_led(YELLOW);
+	set_led(GREEN);
 	reset_led(RED);
 	UART_Receive( rx_buffer, 3);
 }

@@ -89,7 +89,7 @@ int adc_read_values(uint16_t* adc_buffer, UART_HandleTypeDef* huart) {
 	sprintf(msg1,
 			"F1: %d F2:%d F3:%d W1: %d W2:%d W3:%d x: %d y:%d z:%d R:%d \r\n",
 			flexi_1, flexi_2, flexi_3, w1, w2, w3, x, y, z, result);
-	HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+	//HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
 	sprintf(msg1,
 			"{\"weight\" : [\"%d\",\"%d\",\"%d\"], \"outcome\" : \"%d\"}\r\n",
 			w1, w2, w3, result);
@@ -123,7 +123,7 @@ int adc_read_dynamic_values(uint16_t* adc_buffer) {
 	char msg2[500];
 	sprintf(msg2, "passo_av: %d  passo_back: %d w1: %d w2: %d w3: %d", passo_av,
 			passo_back, w1, w2, w3);
-	//HAL_UART_Transmit(huart, (uint8_t*) msg2, strlen(msg2), HAL_MAX_DELAY);
+	//HAL_UART_Transmit(&huart1, (uint8_t*) msg2, strlen(msg2), HAL_MAX_DELAY);
 	if (passo_av == 1 && passo_back == 1 && w1 == 0 && w2 == 0 && w3 == 0) {
 		passo_back = 0;
 		passo_av = 0;
