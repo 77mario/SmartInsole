@@ -93,44 +93,11 @@ void MX_ADC1_Init(void) {
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* AdcHandle) {
 	if (choice == 1) {
-		average_counter = average_counter + 1;
-
-		if (average_counter % 60 == 1) {
-			int result = adc_read_values(&adc_buffer, &huart1);
-
-			if (result == 1) {
-				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_SET);
-
-				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_RESET);
-			} else {
-				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET);
-
-				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_SET);
-			}
-		}
+		choice_static();
 	}else if(choice == 2){
-		average_counter = average_counter + 1;
-
-				if (average_counter % 60 == 1) {
-					int result = adc_read_dynamic_values(&adc_buffer, &huart1);
-
-					if (result == 1) {
-						dynamic_read(&huart1);
-						reset_weight();
-						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_SET);
-
-						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_RESET);
-					} else {
-						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET);
-
-						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_SET);
-					}
-				}
+		choice_dynamic();
 	}else if (choice == 3) {
-		calibrate(&adc_buffer);
-		HAL_ADC_Stop_DMA(&hadc1);
-
-		UART_Receive(rx_buffer, 3);
+		choice_calibrate();
 	}
 }
 
@@ -146,3 +113,45 @@ void stop_ADC(){
 	HAL_ADC_Stop_DMA(&hadc1);
 }
 
+void choice_static(){
+	average_counter = average_counter + 1;
+
+	if (average_counter % 60 == 1) {
+		int result = adc_read_values(&adc_buffer, &huart1);
+
+		if (result == 1) {
+			set_led(GREEN);
+			reset_led(RED);
+		} else {
+			set_led(RED);
+			reset_led(GREEN);
+		}
+	}
+}
+void choice_dynamic(){
+	average_counter = average_counter + 1;
+
+			if (average_counter % 60 == 1) {
+				int result = adc_read_dynamic_values(&adc_buffer);
+				char msg2[30];
+				sprintf(msg2, "RISULTATO : %d \n", result);
+				//HAL_UART_Transmit(&huart1, (uint8_t*) msg2, strlen(msg2), HAL_MAX_DELAY);
+
+				if (result == 1) {
+					dynamic_read();
+					reset_weight();
+					set_led(GREEN);
+					reset_led(RED);
+				} else {
+					set_led(RED);
+					reset_led(GREEN);
+				}
+			}
+}
+
+void choice_calibrate(){
+	calibrate(&adc_buffer);
+	stop_ADC();
+
+	UART_Receive(rx_buffer, 3);
+}

@@ -6,11 +6,12 @@
  */
 
 #include "adc_reader.h"
+#include "shared_vars.h"
 double TOL = 5.0;
-static int X_STATIC = 2045;
-static int Y_STATIC = 2415;
-static int Z_STATIC = 2005;
-int MAX_MOV = 22;
+static int X_STATIC = 2000;
+static int Y_STATIC = 2000;
+static int Z_STATIC = 2000;
+int MAX_MOV = 25;
 static double f1tot = 0.0;
 static double f2tot = 0.0;
 static double f3tot = 0.0;
@@ -24,7 +25,7 @@ void calibrate(uint16_t* adc_buffer) {
 
 }
 
-void static_read(int counter, UART_HandleTypeDef* huart) {
+void static_read(int counter) {
 
 	char msg1[1000];
 	//si potrebbe cancellare
@@ -41,25 +42,25 @@ void static_read(int counter, UART_HandleTypeDef* huart) {
 		f1perc = f2perc = f3perc = 0;
 	}
 	sprintf(msg1,
-			"{\"code\" : \"1\", \"weight_perc\" : {\"avan_sx\":%d,\"avan_dx\":%d,\"back\":%d}}\n",
-			f1perc, f2perc, f3perc);
-	HAL_UART_Transmit(huart, (uint8_t*) msg1, strlen(msg1), 0xFFFF);
+			"{\"code\" : \"1\", \"weight_perc\" : {\"avan_sx\":%d,\"avan_dx\":%d,\"back\":%d}, \"weight_tot\" : %.2f}\n",
+			f1perc, f2perc, f3perc, (f1tot + f2tot + f3tot));
+	HAL_UART_Transmit(&huart1, (uint8_t*) msg1, strlen(msg1), 0xFFFF);
 
 }
-void dynamic_read(UART_HandleTypeDef* huart) {
+void dynamic_read() {
 
 	char msg1[1000];
 	//si potrebbe cancellare
 	int f2perc = f2tot * 100 / (f1tot + f2tot + f3tot);
 	int f3perc = f3tot * 100 / (f1tot + f2tot + f3tot);
 	int f1perc = 100 - f2perc - f3perc;
-	//sprintf(msg1, "{\"code\" : \"1\", \"weight_normal\" : {\"avan_sx\":%f,\"avan_dx\":%f,\"back\":%f}}\n", f1tot,f2tot,f3tot);
-	//HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+	sprintf(msg1, "{\"code\" : \"1\", \"weight_normal\" : {\"avan_sx\":%f,\"avan_dx\":%f,\"back\":%f}}\n", f1tot,f2tot,f3tot);
+	//HAL_UART_Transmit(&huart1, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
 
 	sprintf(msg1,
 			"{\"code\" : \"2\", \"weight_perc\" : {\"avan_sx\":%d,\"avan_dx\":%d,\"back\":%d}}\n",
 			f1perc, f2perc, f3perc);
-	HAL_UART_Transmit(huart, (uint8_t*) msg1, strlen(msg1), 0xFFFF);
+	HAL_UART_Transmit(&huart1, (uint8_t*) msg1, strlen(msg1), 0xFFFF);
 
 }
 void reset_weight() {
@@ -84,22 +85,19 @@ int adc_read_values(uint16_t* adc_buffer, UART_HandleTypeDef* huart) {
 	f2tot = f2tot + w2;
 	f3tot = f3tot + w3;
 
-	//int result = check_weight(w1, w2, w3, is_moving(x,y,z));
 	int result = check_accel_static(x, y, z);
-	//sprintf(msg1, "F1: %d F2:%d F3:%d W1: %d W2:%d W3:%d x: %d y:%d z:%d R:%d \r\n", flexi_1,flexi_2,flexi_3,w1,w2,w3,x,y,z,result);
-	//HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
-	// se la camminata è automatica, bisogna passare anche is moving
+	sprintf(msg1,
+			"F1: %d F2:%d F3:%d W1: %d W2:%d W3:%d x: %d y:%d z:%d R:%d \r\n",
+			flexi_1, flexi_2, flexi_3, w1, w2, w3, x, y, z, result);
+	HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
 	sprintf(msg1,
 			"{\"weight\" : [\"%d\",\"%d\",\"%d\"], \"outcome\" : \"%d\"}\r\n",
 			w1, w2, w3, result);
-	//HAL_UART_Transmit(huart, (uint8_t*) msg1, strlen(msg1), 0xFFFF);
-	//if(w1 == 0.0 and w2 == 0.0 and)
+
 	return result;
-	//char *msg2 = "----------------------------------- \r\n";
-	//HAL_UART_Transmit(&huart2, (uint8_t*) msg2, strlen(msg2), HAL_MAX_DELAY);
 
 }
-int adc_read_dynamic_values(uint16_t* adc_buffer, UART_HandleTypeDef* huart) {
+int adc_read_dynamic_values(uint16_t* adc_buffer) {
 // TODO
 	uint16_t flexi_1 = adc_buffer[0];
 	uint16_t flexi_2 = adc_buffer[1];
@@ -122,83 +120,56 @@ int adc_read_dynamic_values(uint16_t* adc_buffer, UART_HandleTypeDef* huart) {
 		passo_av = 1;
 	}
 
+	char msg2[500];
+	sprintf(msg2, "passo_av: %d  passo_back: %d w1: %d w2: %d w3: %d", passo_av,
+			passo_back, w1, w2, w3);
+	//HAL_UART_Transmit(huart, (uint8_t*) msg2, strlen(msg2), HAL_MAX_DELAY);
 	if (passo_av == 1 && passo_back == 1 && w1 == 0 && w2 == 0 && w3 == 0) {
 		passo_back = 0;
 		passo_av = 0;
 		return 1;
 	} else if (passo_back == 1 && passo_av == 0 && w3 == 0) {
+		passo_back = 0;
 		reset_weight();
 
 	}
 	return -1;
 }
 
-	//int result = check_weight(w1, w2, w3, is_moving(x,y,z));
-	//int result = check_accel_static(x,y,z);
-	//sprintf(msg1, "F1: %d F2:%d F3:%d W1: %d W2:%d W3:%d x: %d y:%d z:%d R:%d \r\n", flexi_1,flexi_2,flexi_3,w1,w2,w3,x,y,z,result);
-	//HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
-	// se la camminata è automatica, bisogna passare anche is moving
-	//sprintf(msg1, "{\"weight\" : [\"%d\",\"%d\",\"%d\"], \"outcome\" : \"%d\"}\r\n",w1,w2,w3,result);
-	//HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
-	//if(w1 == 0.0 and w2 == 0.0 and)
-	//return result;
-	//char *msg2 = "----------------------------------- \r\n";
-	//HAL_UART_Transmit(&huart2, (uint8_t*) msg2, strlen(msg2), HAL_MAX_DELAY);
+//int result = check_weight(w1, w2, w3, is_moving(x,y,z));
+//int result = check_accel_static(x,y,z);
+//sprintf(msg1, "F1: %d F2:%d F3:%d W1: %d W2:%d W3:%d x: %d y:%d z:%d R:%d \r\n", flexi_1,flexi_2,flexi_3,w1,w2,w3,x,y,z,result);
+//HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+// se la camminata è automatica, bisogna passare anche is moving
+//sprintf(msg1, "{\"weight\" : [\"%d\",\"%d\",\"%d\"], \"outcome\" : \"%d\"}\r\n",w1,w2,w3,result);
+//HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+//if(w1 == 0.0 and w2 == 0.0 and)
+//return result;
+//char *msg2 = "----------------------------------- \r\n";
+//HAL_UART_Transmit(&huart2, (uint8_t*) msg2, strlen(msg2), HAL_MAX_DELAY);
 
 // 0 SBAGLIATO
 // 1 OK
 int check_accel_static(int x, int y, int z) {
-if (x > X_STATIC + MAX_MOV || x < X_STATIC - MAX_MOV || y > Y_STATIC + MAX_MOV
-		|| y < Y_STATIC - MAX_MOV || z > Z_STATIC + MAX_MOV
-		|| z < Z_STATIC - MAX_MOV) {
-	return 0;
-}
-return 1;
-}
-
-// 0 = FERMO
-// 1 = MOVIMENTO
-int is_moving(uint16_t x, uint16_t y, uint16_t z) {
-return 0;
+	if (x > X_STATIC + MAX_MOV || x < X_STATIC - MAX_MOV
+			|| y > Y_STATIC + MAX_MOV || y < Y_STATIC - MAX_MOV
+			|| z > Z_STATIC + MAX_MOV || z < Z_STATIC - MAX_MOV) {
+		return 0;
+	}
+	return 1;
 }
 
 // punto di intersezione tra le due rette: 1.85 = 2295
 int get_weight(uint16_t raw_value) {
-int w;
-if (raw_value < 2295) {
-	w = -62.5 * (raw_value * 3.3 / 4095) + 136.25;
-} else {
-	w = -15.38 * (raw_value * 3.3 / 4095) + 50.77;
-}
-if (raw_value > 3850) {
-	return 0;
-}
-return w;
-}
-
-// 0 = PESO SBAGLIATO
-// 1 = PESO OK
-int check_weight(int w1, int w2, int w_back, int is_moving) {
-int w_front = w1 + w2;
-int w_tot = w_front + w_back;
-
-double w_front_perc = w_front * 100 / w_tot;
-double w_back_perc = w_back * 100 / w_tot;
-if (is_moving == 0) {
-	if (w_front_perc > 50 + TOL || w_back_perc > 60 + TOL) {
-		return 0;
+	int w;
+	if (raw_value < 2295) {
+		w = -62.5 * (raw_value * 3.3 / 4095) + 136.25;
 	} else {
-		return 1;
+		w = -15.38 * (raw_value * 3.3 / 4095) + 50.77;
 	}
-
-} else {
-	if (w_front_perc + TOL > 60 || w_back_perc + TOL > 50) {
+	if (raw_value > 3850) {
 		return 0;
-	} else {
-		return 1;
 	}
-
-}
-
+	return w;
 }
 

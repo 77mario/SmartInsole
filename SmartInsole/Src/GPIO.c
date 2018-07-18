@@ -8,6 +8,7 @@
 
 #include "stm32f4xx_hal.h"
 #include "GPIO.h"
+#include "shared_vars.h"
 
 /** Configure pins as
  * Analog
@@ -49,4 +50,12 @@ void MX_GPIO_Init(void) {
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
+}
+
+
+void set_led(uint16_t color){
+	HAL_GPIO_WritePin(GPIOB, color, GPIO_PIN_SET);
+}
+void reset_led(uint16_t color){
+	HAL_GPIO_WritePin(GPIOB, color, GPIO_PIN_RESET);
 }

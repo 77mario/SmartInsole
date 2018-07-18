@@ -12,8 +12,7 @@
  */
 void MX_DMA_Init(void) {
 	/* DMA controller clock enable */
-	__HAL_RCC_DMA2_CLK_ENABLE()
-	;
+	__HAL_RCC_DMA2_CLK_ENABLE();
 
 	/* DMA interrupt init */
 	/* DMA2_Stream0_IRQn interrupt configuration */

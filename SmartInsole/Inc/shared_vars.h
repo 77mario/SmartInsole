@@ -18,3 +18,8 @@ extern DMA_HandleTypeDef hdma_adc1;
 extern ADC_HandleTypeDef hadc1;
 extern TIM_HandleTypeDef htim3;
 extern UART_HandleTypeDef huart1;
+
+#define RED GPIO_PIN_15
+#define GREEN GPIO_PIN_13
+#define YELLOW GPIO_PIN_14
+

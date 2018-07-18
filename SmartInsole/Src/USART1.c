@@ -30,39 +30,22 @@ void MX_USART1_UART_Init(void) {
 
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart) {
-
-	//num = strtol(rx_buffer, &ptr, 10);
-
 	choice = rx_buffer[0] - '0';
 	average_counter = 0;
-			timer = 0;
-	/*long choice = strtol(rx_buffer[0],&ptr,10);
-
-	 long val2 = strtol(rx_buffer[1],&ptr,10);
-
-	 long val3 = strtol(rx_buffer[2],&ptr,10);*/
-	//char * timeChar = rx_buffer[1]+rx_buffer[2];
-	//int time = strtol(timeChar);
+	timer = 0;
 	if (choice == 1) {
 		//statica
+		 int time = (rx_buffer[1] - '0') * 10 + (rx_buffer[2] - '0');
+		 start_static(time);
 
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
-
-
-		timer_limit = (rx_buffer[1] - '0') * 10 + (rx_buffer[2] - '0');
-		reset_weight();
-		start_TIM3();
-		start_ADC();
 	}else if (choice == 2){
 		//dinamica
 		int reset = rx_buffer[2] - '0';
 		if (reset == 1){
-			stop_ADC();
-			HAL_UART_Receive_IT(&huart1, rx_buffer, 3);
+			stop_dynamic();
 
 		} else {
-			reset_weight();
-		start_ADC();
+			start_dynamic();
 		}
 
 	}else if (choice == 3) {
@@ -70,11 +53,34 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart) {
 
 		start_ADC();
 	} else {
-	HAL_UART_Receive_IT(&huart1, (uint8_t *) rx_buffer, 3);
+	UART_Receive(rx_buffer, 3);
 	}
 
 	//HAL_UART_Transmit(&huart1, (uint8_t*)rx_buffer, sizeof(rx_buffer), 0xFFFF);
 
+}
+
+void start_static(int time){
+	reset_led(YELLOW);
+
+	timer_limit = time;
+	reset_weight();
+	start_TIM3();
+	start_ADC();
+}
+void start_dynamic(){
+	stop_ADC();
+	set_led(YELLOW);
+	reset_led(GREEN);
+	reset_led(RED);
+	UART_Receive( rx_buffer, 3);
+}
+void stop_dynamic(){
+	stop_ADC();
+	set_led(YELLOW);
+	reset_led(GREEN);
+	reset_led(RED);
+	UART_Receive( rx_buffer, 3);
 }
 
 void UART_Receive(uint8_t *pData, uint16_t Size){
@@ -82,4 +88,6 @@ void UART_Receive(uint8_t *pData, uint16_t Size){
 	HAL_UART_Receive_IT(&huart1, rx_buffer, 3);
 }
 
-
+void UART_Transmit(uint8_t *msg){
+	HAL_UART_Transmit(&huart1, (uint8_t*)msg, strlen(msg), 0xFFFF);
+}

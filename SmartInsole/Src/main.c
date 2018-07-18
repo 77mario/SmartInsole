@@ -41,7 +41,6 @@ int average_counter;
 int choice = 0;
 
 uint8_t rx_buffer[3];
-char* tx_buffer = "Hello UART\n";
 
 /* USER CODE END PV */
 
@@ -68,8 +67,8 @@ int main(void) {
 	init_peripherals();
 
 	//HAL_UART_Transmit(&huart1, (uint8_t*)tx_buffer, strlen(tx_buffer), 0xFFFF);
-	HAL_UART_Receive_IT(&huart1, rx_buffer, 3);
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);
+	UART_Receive(rx_buffer, 3);
+	set_led(YELLOW);
 
 	/* USER CODE END 2 */
 

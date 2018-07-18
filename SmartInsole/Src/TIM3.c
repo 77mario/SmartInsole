@@ -59,18 +59,17 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 		if (timer >= timer_limit) {
 
 			stop_ADC();
-			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET);
-			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_RESET);
-			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);
-			HAL_TIM_Base_Stop_IT(&htim3);
-			static_read(average_counter, &huart1);
+			set_led(YELLOW);
+			reset_led(GREEN);
+			reset_led(RED);
+			stop_TIM3();
+			static_read(average_counter/60);
 
 			//char *msg = "Completo";
 
 			//HAL_UART_Transmit(&huart1, (uint8_t*)msg, strlen(msg), 0xFFFF);
 
 			UART_Receive(rx_buffer, 3);
-			char i = rx_buffer[0];
 
 		}
 	}
@@ -79,4 +78,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 void start_TIM3(){
 
 	HAL_TIM_Base_Start_IT(&htim3);
+}
+
+void stop_TIM3(){
+
+	HAL_TIM_Base_Stop_IT(&htim3);
 }
