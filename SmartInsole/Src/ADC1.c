@@ -140,11 +140,9 @@ void choice_dynamic(){
 				if (result == 1) {
 					dynamic_read();
 					reset_weight();
-					set_led(GREEN);
-					reset_led(RED);
+
 				} else if (result == 0){
-					set_led(RED);
-					reset_led(GREEN);
+					set_led(YELLOW);
 				}
 			}
 }
