@@ -7,7 +7,6 @@
 
 #include "adc_reader.h"
 #include "shared_vars.h"
-double TOL = 5.0;
 static int X_STATIC = 2000;
 static int Y_STATIC = 2000;
 static int Z_STATIC = 2000;
@@ -28,7 +27,6 @@ void calibrate(uint16_t* adc_buffer) {
 void static_read(int counter) {
 
 	char msg1[1000];
-	//si potrebbe cancellare
 	f1tot = f1tot / counter;
 	f2tot = f2tot / counter;
 	f3tot = f3tot / counter;
@@ -42,8 +40,8 @@ void static_read(int counter) {
 		f1perc = f2perc = f3perc = 0;
 	}
 	sprintf(msg1,
-			"{\"code\" : \"1\", \"weight_perc\" : {\"avan_sx\":%d,\"avan_dx\":%d,\"back\":%d}, \"weight_tot\" : %.2f}\n",
-			f1perc, f2perc, f3perc, (f1tot + f2tot + f3tot));
+			"{\"code\" : \"1\", \"weight_perc\" : {\"avan_sx\":%d,\"avan_dx\":%d,\"back\":%d}, \"weight_tot\" : %.2f, \"time\": %d}\n",
+			f1perc, f2perc, f3perc, (f1tot + f2tot + f3tot), timer_limit);
 	HAL_UART_Transmit(&huart1, (uint8_t*) msg1, strlen(msg1), 0xFFFF);
 
 }
@@ -89,7 +87,7 @@ int adc_read_values(uint16_t* adc_buffer, UART_HandleTypeDef* huart) {
 	sprintf(msg1,
 			"F1: %d F2:%d F3:%d W1: %d W2:%d W3:%d x: %d y:%d z:%d R:%d \r\n",
 			flexi_1, flexi_2, flexi_3, w1, w2, w3, x, y, z, result);
-	//HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
+	HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
 	sprintf(msg1,
 			"{\"weight\" : [\"%d\",\"%d\",\"%d\"], \"outcome\" : \"%d\"}\r\n",
 			w1, w2, w3, result);
@@ -112,7 +110,7 @@ int adc_read_dynamic_values(uint16_t* adc_buffer) {
 
 	if (w3 > 0) {
 		passo_back = 1;
-		f3tot = f3tot + w3;
+		f3tot = get_max(w3, f3tot);
 	}
 	if ((w2 > 0 || w1 > 0) && passo_back == 1) {
 		f2tot = f2tot + w2;
@@ -131,6 +129,7 @@ int adc_read_dynamic_values(uint16_t* adc_buffer) {
 	} else if (passo_back == 1 && passo_av == 0 && w3 == 0) {
 		passo_back = 0;
 		reset_weight();
+		return 0;
 
 	}
 	return -1;
@@ -167,7 +166,7 @@ int get_weight(uint16_t raw_value) {
 	} else {
 		w = -15.38 * (raw_value * 3.3 / 4095) + 50.77;
 	}
-	if (raw_value > 3850) {
+	if (raw_value > 3920) {
 		return 0;
 	}
 	return w;

@@ -11,6 +11,13 @@
 
 #include "utils.h"
 
+
+double get_max(double i, double j){
+	if (i > j){
+		return i;
+	}
+	return j;
+}
 void init_peripherals(){
 	HAL_Init();
 

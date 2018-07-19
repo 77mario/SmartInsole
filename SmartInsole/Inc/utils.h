@@ -5,7 +5,7 @@
  *      Author: vimat
  */
 
-
+double get_max(double i, double j);
 void init_peripherals();
 void SystemClock_Config(void) ;
 void _Error_Handler(char *file, int line);
