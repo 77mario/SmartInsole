@@ -76,9 +76,9 @@ int adc_read_values(uint16_t* adc_buffer, UART_HandleTypeDef* huart) {
 	uint16_t y = adc_buffer[4];
 	uint16_t z = adc_buffer[5];
 
-	int w1 = get_weight(flexi_1);
-	int w2 = get_weight(flexi_2);
-	int w3 = get_weight(flexi_3);
+	double w1 = get_weight(flexi_1);
+	double w2 = get_weight(flexi_2);
+	double w3 = get_weight(flexi_3);
 	f1tot = f1tot + w1;
 	f2tot = f2tot + w2;
 	f3tot = f3tot + w3;
@@ -104,9 +104,9 @@ int adc_read_dynamic_values(uint16_t* adc_buffer) {
 	uint16_t y = adc_buffer[4];
 	uint16_t z = adc_buffer[5];
 
-	int w1 = get_weight(flexi_1);
-	int w2 = get_weight(flexi_2);
-	int w3 = get_weight(flexi_3);
+	double w1 = get_weight(flexi_1);
+	double w2 = get_weight(flexi_2);
+	double w3 = get_weight(flexi_3);
 
 	if (w3 > 0) {
 		passo_back = 1;
@@ -159,15 +159,15 @@ int check_accel_static(int x, int y, int z) {
 }
 
 // punto di intersezione tra le due rette: 1.85 = 2295
-int get_weight(uint16_t raw_value) {
-	int w;
+double get_weight(uint16_t raw_value) {
+	double w;
 	if (raw_value < 2295) {
 		w = -62.5 * (raw_value * 3.3 / 4095) + 136.25;
 	} else {
 		w = -15.38 * (raw_value * 3.3 / 4095) + 50.77;
 	}
 	if (raw_value > 3920) {
-		return 0;
+		return 0.0;
 	}
 	return w;
 }
