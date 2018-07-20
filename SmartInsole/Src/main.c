@@ -49,25 +49,6 @@ int tim2_counter = 0;
 
 uint8_t rx_buffer[3];
 
-/* USER CODE END PV */
-
-/* Private function prototypes -----------------------------------------------*/
-
-
-/* USER CODE BEGIN PFP */
-/* Private function prototypes -----------------------------------------------*/
-
-/* USER CODE END PFP */
-
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
-
-/**
- * @brief  The application entry point.
- *
- * @retval None
- */
 int main(void) {
 	init_peripherals();
 	UART_Receive(rx_buffer, 3);
@@ -82,6 +63,3 @@ int main(void) {
 }
 
 
-
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

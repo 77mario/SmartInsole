@@ -65,9 +65,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart) {
 	}else {
 		UART_Receive(rx_buffer, 3);
 	}
-
-	//HAL_UART_Transmit(&huart1, (uint8_t*)rx_buffer, sizeof(rx_buffer), 0xFFFF);
-
 }
 
 void start_static(int time){

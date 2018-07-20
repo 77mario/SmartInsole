@@ -145,8 +145,6 @@ void choice_dynamic(){
 				int result = adc_read_dynamic_values(&adc_buffer);
 				char msg2[30];
 				sprintf(msg2, "RISULTATO : %d \n", result);
-				//HAL_UART_Transmit(&huart1, (uint8_t*) msg2, strlen(msg2), HAL_MAX_DELAY);
-
 				if (result == 1) {
 					dynamic_read();
 					reset_weight();
