@@ -14,7 +14,7 @@
 #include "shared_vars.h"
 #include "TIM.h"
 #include "main.h"
-#include "ADC1.h"
+#include "ADC.h"
 #include "DMA.h"
 #include "GPIO.h"
 #include "USART1.h"
@@ -44,6 +44,8 @@ int average_counter = 0;
 int choice = 0;
 int motor_time = 0;
 int motor_time_limit = 0;
+int auto_state = 0;
+int tim2_counter = 0;
 
 uint8_t rx_buffer[3];
 

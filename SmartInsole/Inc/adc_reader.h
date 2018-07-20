@@ -16,4 +16,5 @@ int check_accel_static(int x, int y, int z);
 int adc_read_values(uint16_t* adc_buffer,UART_HandleTypeDef* huart);
 int adc_read_dynamic_values(uint16_t* adc_buffer);
 double get_weight(uint16_t raw_value);
+void calibrate(uint16_t* adc_buffer);
 #endif /* ADC_READER_H_ */

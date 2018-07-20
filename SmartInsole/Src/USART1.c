@@ -51,9 +51,19 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart) {
 	}else if (choice == 3) {
 		//calibrazione
 
-		start_ADC();
-	} else {
-	UART_Receive(rx_buffer, 3);
+		start_ADC1();
+	} else if (choice == 4){
+		//automatica
+		int reset = rx_buffer[2] - '0';
+				if (reset == 1){
+					stop_auto();
+
+				} else {
+					start_auto();
+				}
+
+	}else {
+		UART_Receive(rx_buffer, 3);
 	}
 
 	//HAL_UART_Transmit(&huart1, (uint8_t*)rx_buffer, sizeof(rx_buffer), 0xFFFF);
@@ -65,12 +75,14 @@ void start_static(int time){
 
 	timer_limit = time;
 	reset_weight();
-	start_TIM3();
-	start_ADC();
+	if(choice != 4){
+		start_TIM3();
+		}
+	start_ADC1();
 }
 void start_dynamic(){
 	reset_weight();
-	start_ADC();
+	start_ADC1();
 	reset_led(YELLOW);
 	reset_led(GREEN);
 	reset_led(RED_BACK);
@@ -78,11 +90,26 @@ void start_dynamic(){
 	UART_Receive( rx_buffer, 3);
 }
 void stop_dynamic(){
-	stop_ADC();
+	stop_ADC1();
 	set_led(YELLOW);
 	reset_led(GREEN);
 	reset_led(RED_BACK);
 	reset_led(RED_FRONT);
+	UART_Receive( rx_buffer, 3);
+}
+void start_auto(){
+	start_dynamic();
+	tim2_counter = 0;
+	start_TIM2();
+}
+void stop_auto(){
+	stop_TIM2();
+	stop_ADC1();
+	set_led(YELLOW);
+	reset_led(GREEN);
+	reset_led(RED_BACK);
+	reset_led(RED_FRONT);
+	average_counter = 0;
 	UART_Receive( rx_buffer, 3);
 }
 
@@ -91,6 +118,4 @@ void UART_Receive(uint8_t *pData, uint16_t Size){
 	HAL_UART_Receive_IT(&huart1, rx_buffer, 3);
 }
 
-void UART_Transmit(uint8_t *msg){
-	HAL_UART_Transmit(&huart1, (uint8_t*)msg, strlen(msg), 0xFFFF);
-}
+

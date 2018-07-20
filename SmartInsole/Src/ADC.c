@@ -7,11 +7,15 @@
 
 
 #include "stm32f4xx_hal.h"
-#include "ADC1.h"
+#include "ADC.h"
 
 #include "shared_vars.h"
+#define STATIC 1
+#define DYNAMIC 0
 
 static uint16_t adc_buffer[6];
+
+
 
 
 /* ADC1 init function */
@@ -98,17 +102,19 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* AdcHandle) {
 		choice_dynamic();
 	}else if (choice == 3) {
 		choice_calibrate();
+	}else if (choice == 4){
+		choice_auto();
 	}
 }
 
 
 
-void start_ADC(){
+void start_ADC1(){
 	if (HAL_ADC_Start_DMA(&hadc1, (uint16_t*) &adc_buffer,
 							hadc1.Init.NbrOfConversion) != HAL_OK);
 }
 
-void stop_ADC(){
+void stop_ADC1(){
 
 	HAL_ADC_Stop_DMA(&hadc1);
 }
@@ -153,7 +159,36 @@ void choice_dynamic(){
 
 void choice_calibrate(){
 	calibrate(&adc_buffer);
-	stop_ADC();
+	stop_ADC1();
 
 	UART_Receive(rx_buffer, 3);
+}
+void choice_auto(){
+	if(auto_state == DYNAMIC){
+		choice_dynamic();
+		int r = check_accel_static(adc_buffer[3],adc_buffer[4],adc_buffer[5]);
+		if(r == 0){
+			reset_tim2_counter();
+		}
+	} else {
+		choice_static();
+	}
+}
+
+void change_to_static(){
+	stop_dynamic();
+	reset_tim2_counter();
+	start_static();
+	auto_state = STATIC;
+}
+void change_to_dynamic(){
+	timer_limit = tim2_counter;
+	stop_static();
+	start_TIM2();
+	reset_tim2_counter();
+	start_dynamic();
+	auto_state = DYNAMIC;
+}
+void reset_tim2_counter(){
+	tim2_counter = 0;
 }
