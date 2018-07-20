@@ -9,3 +9,5 @@
 void MX_GPIO_Init(void);
 void set_led(uint16_t c);
 void reset_led(uint16_t c);
+void activate_motor(int time);
+void stop_motor();

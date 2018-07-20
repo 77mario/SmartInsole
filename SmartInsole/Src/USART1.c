@@ -72,15 +72,17 @@ void start_dynamic(){
 	reset_weight();
 	start_ADC();
 	reset_led(YELLOW);
-	set_led(GREEN);
-	reset_led(RED);
+	reset_led(GREEN);
+	reset_led(RED_BACK);
+	reset_led(RED_FRONT);
 	UART_Receive( rx_buffer, 3);
 }
 void stop_dynamic(){
 	stop_ADC();
 	set_led(YELLOW);
 	reset_led(GREEN);
-	reset_led(RED);
+	reset_led(RED_BACK);
+	reset_led(RED_FRONT);
 	UART_Receive( rx_buffer, 3);
 }
 

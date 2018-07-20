@@ -121,9 +121,13 @@ void choice_static(){
 
 		if (result == 1) {
 			set_led(GREEN);
-			reset_led(RED);
+			reset_led(RED_BACK);
+			reset_led(RED_FRONT);
+			stop_motor();
 		} else {
-			set_led(RED);
+			set_led(RED_BACK);
+			set_led(RED_FRONT);
+			activate_motor(0);
 			reset_led(GREEN);
 		}
 	}
@@ -142,7 +146,7 @@ void choice_dynamic(){
 					reset_weight();
 
 				} else if (result == 0){
-					set_led(YELLOW);
+					activate_motor(1);
 				}
 			}
 }
