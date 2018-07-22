@@ -198,5 +198,5 @@ void stop_static(){
 	stop_motor();
 	stop_TIM3();
 	static_read(average_counter/60);
-	UART_Receive(rx_buffer, 3);
+	UART_Receive();
 }
