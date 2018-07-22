@@ -63,7 +63,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart) {
 				}
 
 	}else {
-		UART_Receive(rx_buffer, 3);
+		UART_Receive();
 	}
 }
 
@@ -84,7 +84,7 @@ void start_dynamic(){
 	reset_led(GREEN);
 	reset_led(RED_BACK);
 	reset_led(RED_FRONT);
-	UART_Receive( rx_buffer, 3);
+	UART_Receive();
 }
 void stop_dynamic(){
 	stop_ADC1();
@@ -92,7 +92,7 @@ void stop_dynamic(){
 	reset_led(GREEN);
 	reset_led(RED_BACK);
 	reset_led(RED_FRONT);
-	UART_Receive( rx_buffer, 3);
+	UART_Receive();
 }
 void start_auto(){
 	start_dynamic();
@@ -107,10 +107,10 @@ void stop_auto(){
 	reset_led(RED_BACK);
 	reset_led(RED_FRONT);
 	average_counter = 0;
-	UART_Receive( rx_buffer, 3);
+	UART_Receive( );
 }
 
-void UART_Receive(uint8_t *pData, uint16_t Size){
+void UART_Receive(){
 
 	HAL_UART_Receive_IT(&huart1, rx_buffer, 3);
 }
