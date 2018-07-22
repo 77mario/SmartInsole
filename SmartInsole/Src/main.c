@@ -51,7 +51,7 @@ uint8_t rx_buffer[3];
 
 int main(void) {
 	init_peripherals();
-	UART_Receive(rx_buffer, 3);
+	UART_Receive();
 	set_led(YELLOW);
 
 
