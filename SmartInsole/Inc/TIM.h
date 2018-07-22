@@ -15,4 +15,3 @@ void start_TIM3();
 void stop_TIM3();
 void start_TIM4();
 void stop_TIM4();
-void stop_static();

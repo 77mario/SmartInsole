@@ -7,7 +7,7 @@
 
 
 #include "stm32f4xx_hal.h"
-#include "USART1.h"
+#include "USART.h"
 #include "shared_vars.h"
 
 
@@ -77,6 +77,18 @@ void start_static(int time){
 		}
 	start_ADC1();
 }
+
+void stop_static(){
+	stop_ADC1();
+	set_led(YELLOW);
+	reset_led(GREEN);
+	reset_led(RED_BACK);
+	reset_led(RED_FRONT);
+	stop_motor();
+	stop_TIM3();
+	static_read(average_counter/60);
+	UART_Receive();
+}
 void start_dynamic(){
 	reset_weight();
 	start_ADC1();
@@ -86,6 +98,7 @@ void start_dynamic(){
 	reset_led(RED_FRONT);
 	UART_Receive();
 }
+
 void stop_dynamic(){
 	stop_ADC1();
 	set_led(YELLOW);

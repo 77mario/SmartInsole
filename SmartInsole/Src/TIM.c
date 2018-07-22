@@ -189,14 +189,3 @@ void stop_TIM4(){
 	HAL_TIM_Base_Stop_IT(&htim4);
 }
 
-void stop_static(){
-	stop_ADC1();
-	set_led(YELLOW);
-	reset_led(GREEN);
-	reset_led(RED_BACK);
-	reset_led(RED_FRONT);
-	stop_motor();
-	stop_TIM3();
-	static_read(average_counter/60);
-	UART_Receive();
-}

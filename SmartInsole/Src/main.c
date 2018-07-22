@@ -10,14 +10,15 @@
 
 /* Includes ------------------------------------------------------------------*/
 
+
 #include "stm32f4xx_hal.h"
 #include "shared_vars.h"
 #include "TIM.h"
+#include "USART.h"
 #include "main.h"
 #include "ADC.h"
 #include "DMA.h"
 #include "GPIO.h"
-#include "USART1.h"
 #include "utils.h"
 
 

@@ -12,4 +12,5 @@ void start_dynamic();
 void stop_dynamic();
 void start_auto();
 void stop_auto();
-void UART_Receive(uint8_t *pData, uint16_t Size);
+void UART_Receive();
+void stop_static();
