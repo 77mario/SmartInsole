@@ -34,8 +34,6 @@ void static_read(int counter) {
 	int f2perc = f2tot * 100 / (f1tot + f2tot + f3tot);
 	int f3perc = f3tot * 100 / (f1tot + f2tot + f3tot);
 	int f1perc = 100 - f2perc - f3perc;
-	//sprintf(msg1, "{\"code\" : \"1\", \"weight_normal\" : {\"avan_sx\":%f,\"avan_dx\":%f,\"back\":%f}}\n", f1tot,f2tot,f3tot);
-	//HAL_UART_Transmit(huart, (uint8_t*)msg1, strlen(msg1), 0xFFFF);
 
 	if (f1tot < 0.2 && f2tot < 0.2 && f3tot < 0.2) {
 		return;
@@ -100,7 +98,7 @@ int adc_read_values(uint16_t* adc_buffer, UART_HandleTypeDef* huart) {
 
 }
 int adc_read_dynamic_values(uint16_t* adc_buffer) {
-// TODO
+
 	uint16_t flexi_1 = adc_buffer[0];
 	uint16_t flexi_2 = adc_buffer[1];
 	uint16_t flexi_3 = adc_buffer[2];
