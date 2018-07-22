@@ -144,7 +144,6 @@ void choice_dynamic(){
 			if (average_counter % 60 == 1) {
 				int result = adc_read_dynamic_values(&adc_buffer);
 				char msg2[30];
-				sprintf(msg2, "RISULTATO : %d \n", result);
 				if (result == 1) {
 					dynamic_read();
 					reset_weight();
@@ -159,7 +158,7 @@ void choice_calibrate(){
 	calibrate(&adc_buffer);
 	stop_ADC1();
 
-	UART_Receive(rx_buffer, 3);
+	UART_Receive();
 }
 void choice_auto(){
 	if(auto_state == DYNAMIC){
